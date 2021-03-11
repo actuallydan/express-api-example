@@ -34,13 +34,60 @@ const Products = {
     }
   },
   findById: async (id) => {
-    // TBD: Implement get resource by id
+    try {
+      const productsString = await fs.readFile(DB, "utf-8");
+      const productsArr = JSON.parse(productsString);
+
+      const product = productsArr.find((p) => p.id === id);
+
+      if (!product) {
+        throw `Item ${id} does not exist`;
+      }
+
+      // return with the specific item
+      return product;
+    } catch (e) {
+      throw e;
+    }
   },
   update: async (id, updates) => {
-    // TBD: Implement update by id
+    try {
+      const productsString = await fs.readFile(DB, "utf-8");
+      const productsArr = JSON.parse(productsString);
+
+      const productIndex = productsArr.findIndex((p) => p.id === id);
+
+      if (productIndex === -1) {
+        throw `Item ${id} does not exist`;
+      }
+
+      // update our array by modifying just the item we want to change
+      productsArr[productIndex] = {
+        ...productsArr[productIndex],
+        ...updates,
+      };
+
+      await fs.writeFile(DB, JSON.stringify(productsArr));
+
+      // return with the modified item
+      return productsArr[productIndex];
+    } catch (e) {
+      throw e;
+    }
   },
   remove: async (id) => {
-    // TBD: Implement remove by id
+    try {
+      const productsString = await fs.readFile(DB, "utf-8");
+      const oldProductsArr = JSON.parse(productsString);
+
+      const newProductsArr = oldProductsArr.filter((p) => p.id !== id);
+
+      await fs.writeFile(DB, JSON.stringify(newProductsArr));
+
+      return true;
+    } catch (e) {
+      throw e;
+    }
   },
 };
 

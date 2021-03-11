@@ -97,7 +97,15 @@ app.put("/products", async (req, res) => {
 */
 app.delete("/products/:id", async (req, res) => {
   console.log(`/products DELETE - ${new Date().toJSON()}`);
-  // TODO: implement an update function
+
+  try {
+    let success = await Products.remove(req.params.id);
+
+    res.status(200).json({ success });
+  } catch (e) {
+    console.error(e);
+    res.status(400).json(new Error(e));
+  }
 });
 
 ////////////////////////////////////////////////
