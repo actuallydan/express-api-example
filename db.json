@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Vanilla",
+    "desc": "Tahitian Vanilla",
+    "price": 3,
+    "id": "17822c6cfe9"
+  },
+  {
+    "name": "Chocolate",
+    "desc": "German Dark Chocolate",
+    "price": 5.5,
+    "id": "17822e01225"
+  },
+  {
+    "name": "Raspberry",
+    "desc": "Contains 0% fruit",
+    "price": 1.99,
+    "id": "17823293694"
+  }
+]
